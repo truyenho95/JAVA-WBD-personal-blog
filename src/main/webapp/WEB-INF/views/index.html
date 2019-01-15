@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Justin's Blog</title>
 </head>
 <body>
-  <h1>Deploy successful!</h1>
+  <a th:href="@{/article/create}">Create new article</a>
+  <h1>Articles List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <th:block th:each="article : ${articles}">
+        <tr>
+          <td th:text="${article.title}"></td>
+          <td th:text="${article.date}"></td>
+        </tr>
+      </th:block>
+    </tbody>
+  </table>
+  <div>
+    <a th:href="@{/'articles'(page=${articles.number - 1})}" th:if="${!articles.first}">Previous</a>
+    <span th:text="${articles.number + 1}"></span>/<span th:text="${articles.totalPages}"></span>
+    <a th:href="@{/'articles'(page=${articles.number + 1})}" th:if="${!articles.last}">Next</a>
+  </div>
 </body>
 </html>

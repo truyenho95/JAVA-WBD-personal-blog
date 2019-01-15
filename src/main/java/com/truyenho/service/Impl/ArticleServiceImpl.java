@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
+
 public class ArticleServiceImpl implements ArticleService {
 
   @Autowired
@@ -20,6 +22,11 @@ public class ArticleServiceImpl implements ArticleService {
   @Override
   public Page<Article> findAll(Pageable pageable) {
     return articleRepository.findAll(pageable);
+  }
+
+  @Override
+  public Page<Article> findAllByTitleContaining(String title, Pageable pageable) {
+    return articleRepository.findAllByTitleContaining(title, pageable);
   }
 
   @Override
