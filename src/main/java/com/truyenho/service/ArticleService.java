@@ -11,7 +11,7 @@ public interface ArticleService {
 
   Page<Article> findAll(Pageable pageable);
   Page<Article> findAllByTitleContaining(String title, Pageable pageable);
-//  Page<Article> findAllByDateContaining(LocalDate date, Pageable pageable);
+  Page<Article> findAllByDateContaining(LocalDate date, Pageable pageable);
 
   void save(Article article);
 

@@ -22,12 +22,12 @@ public class ArticleController {
 
   @GetMapping("/")
   public ModelAndView home() {
-    return new ModelAndView("index");
+    return new ModelAndView("redirect:/article/list");
   }
 
   @GetMapping("/article/list")
   public ModelAndView listArticles(@RequestParam("title") Optional<String> title, Pageable pageable) {
-//    try {
+    try {
       Page<Article> articles;
       if (title.isPresent()) {
         articles = articleService.findAllByTitleContaining(title.get(), pageable);
@@ -39,11 +39,12 @@ public class ArticleController {
       modelAndView.addObject("articles", articles);
       return modelAndView;
 
-/*    } catch (HibernateException hibernateEx) {
+    } catch (HibernateException hibernateEx) {
       ModelAndView modelAndView = new ModelAndView("error");
       modelAndView.addObject("exception", hibernateEx.fillInStackTrace());
       return modelAndView;
-    }*/
-
+    }
   }
+
+
 }

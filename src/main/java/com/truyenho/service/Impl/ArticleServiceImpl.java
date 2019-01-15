@@ -30,6 +30,11 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
+  public Page<Article> findAllByDateContaining(LocalDate date, Pageable pageable) {
+    return articleRepository.findAllByDateContaining(date, pageable);
+  }
+
+  @Override
   public void save(Article article) {
     articleRepository.save(article);
   }

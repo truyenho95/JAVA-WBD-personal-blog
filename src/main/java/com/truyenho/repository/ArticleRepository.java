@@ -9,5 +9,5 @@ import java.time.LocalDate;
 
 public interface ArticleRepository extends PagingAndSortingRepository<Article, Long> {
   Page<Article> findAllByTitleContaining(String title, Pageable pageable);
-//  Page<Article> findAllByDateContaining(LocalDate date, Pageable pageable);
+  Page<Article> findAllByDateContaining(LocalDate date, Pageable pageable);
 }
