@@ -69,9 +69,13 @@ public class ArticleController {
 
   @GetMapping("/article/edit/{id}")
   public ModelAndView showEditArticle(@PathVariable("id") Article article) {
-    ModelAndView modelAndView = new ModelAndView("edit");
-    modelAndView.addObject("article", article);
-    return modelAndView;
+    if (article == null) {
+      return new ModelAndView("error");
+    } else {
+      ModelAndView modelAndView = new ModelAndView("edit");
+      modelAndView.addObject("article", article);
+      return modelAndView;
+    }
   }
 
   @PostMapping("/article/edit")

@@ -9,20 +9,22 @@
   <h1>Create new article</h1>
   <p th:text="${success}"></p>
   <form th:action="@{/article/create}" th:method="POST">
-    <th:block th:object="${article}">
-      <tr>
-        <td>Title</td>
-        <td><input type="text" th:field="*{title}"></td>
-      </tr>
-      <tr>
-        <td>Content</td>
-        <td><textarea th:rows="4" th:cols="10" th:field="*{content}"></textarea></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><input type="submit" value="Create Article"></td>
-      </tr>
-    </th:block>
+    <table>
+      <th:block th:object="${article}">
+        <tr>
+          <td>Title</td>
+          <td><input type="text" th:field="*{title}"></td>
+        </tr>
+        <tr>
+          <td>Content</td>
+          <td><textarea th:rows="4" th:cols="10" th:field="*{content}"></textarea></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" value="Create Article"></td>
+        </tr>
+      </th:block>
+    </table>
   </form>
 </body>
 </html>
