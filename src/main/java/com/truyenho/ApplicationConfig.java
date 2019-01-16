@@ -1,5 +1,6 @@
 package com.truyenho;
 
+import com.truyenho.formatter.ArticleFormatter;
 import com.truyenho.service.ArticleService;
 import com.truyenho.service.Impl.ArticleServiceImpl;
 import org.springframework.beans.BeansException;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -44,6 +46,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
   @Override
   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
     this.applicationContext = applicationContext;
+  }
+
+  @Override
+  public void addFormatters(FormatterRegistry registry) {
+    registry.addFormatter(new ArticleFormatter(applicationContext.getBean(ArticleService.class)));
   }
 
   @Bean
