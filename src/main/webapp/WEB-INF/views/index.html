@@ -6,6 +6,7 @@
 </head>
 <body>
   <a th:href="@{/article/create}">Create new article</a>
+  <p th:text="${success}"></p>
   <h1>Articles List</h1>
   <table border="1" cellpadding="10" cellspacing="0">
     <thead>
@@ -23,6 +24,9 @@
         <tr>
           <td th:text="${article.title}"></td>
           <td th:text="${article.date}"></td>
+          <td></td>
+          <td><a th:href="@{/article/edit/__${article.id}__}">Edit</a></td>
+          <td><a th:href="@{/article/delete/__${article.id}__}">Delete</a></td>
         </tr>
       </th:block>
     </tbody>

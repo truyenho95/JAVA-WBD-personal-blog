@@ -2,29 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Edit Article</title>
+  <title>Delete Article</title>
 </head>
 <body>
   <a th:href="@{/article/list}">Back to list</a>
-  <h1>Edit Article</h1>
-  <form th:action="@{/article/edit}" th:object="${article}" th:method="POST">
+  <h1>Remove Article</h1>
+  <form th:action="@{/article/delete}" th:method="post" th:object="${article}">
     <input type="hidden" th:field="*{id}">
     <table>
       <tr>
         <td>Title:</td>
-        <td><input type="text" th:field="*{title}"></td>
+        <td th:text="${article.title}"></td>
       </tr>
       <tr>
         <td>Date:</td>
-        <td><input th:type="text" th:field="*{date}"></td>
+        <td th:text="${article.date}"></td>
       </tr>
       <tr>
         <td>Content:</td>
-        <td><textarea th:rows="5" th:cols="20" th:field="*{content}"></textarea></td>
+        <td th:text="${article.content}"></td>
       </tr>
       <tr>
         <td></td>
-        <td><input type="submit" value="Edit Article"></td>
+        <td><input type="submit" value="Delete Article"></td>
       </tr>
     </table>
   </form>

@@ -25,7 +25,7 @@ public class ArticleController {
   }
 
   @GetMapping("/article/list")
-  public ModelAndView listArticles(@RequestParam("title") Optional<String> title, Pageable pageable) {
+  public ModelAndView listArticles(@RequestParam("title") Optional<String> title, Pageable pageable, @ModelAttribute("success") String success) {
     try {
       Page<Article> articles;
       if (title.isPresent()) {
@@ -36,6 +36,7 @@ public class ArticleController {
 
       ModelAndView modelAndView = new ModelAndView("index");
       modelAndView.addObject("articles", articles);
+      modelAndView.addObject("success", success);
       return modelAndView;
 
     } catch (Exception ex) {
@@ -56,7 +57,7 @@ public class ArticleController {
   public ModelAndView createArticle(@ModelAttribute("article") Article article) {
     try {
       articleService.save(article);
-      ModelAndView modelAndView = new ModelAndView("create");
+      ModelAndView modelAndView = new ModelAndView("redirect:/article/list");
       modelAndView.addObject("article", new Article());
       modelAndView.addObject("success", "Create new article successful");
       return modelAndView;
@@ -69,21 +70,34 @@ public class ArticleController {
 
   @GetMapping("/article/edit/{id}")
   public ModelAndView showEditArticle(@PathVariable("id") Article article) {
-    if (article == null) {
-      return new ModelAndView("error");
-    } else {
-      ModelAndView modelAndView = new ModelAndView("edit");
-      modelAndView.addObject("article", article);
-      return modelAndView;
-    }
+    ModelAndView modelAndView = new ModelAndView("edit");
+    modelAndView.addObject("article", article);
+    return modelAndView;
   }
 
   @PostMapping("/article/edit")
   public ModelAndView editArticle(@ModelAttribute("article") Article article) {
     articleService.save(article);
-    ModelAndView modelAndView = new ModelAndView("edit");
+    ModelAndView modelAndView = new ModelAndView("redirect:/article/list");
     modelAndView.addObject("success", "Edit Article Successful");
     modelAndView.addObject("article", new Article());
+    return modelAndView;
+  }
+
+  @GetMapping("/article/delete/{id}")
+  public ModelAndView showDeleteArticle(@PathVariable("id") Article article) {
+    ModelAndView modelAndView = new ModelAndView("delete");
+    modelAndView.addObject("article", article);
+    modelAndView.addObject("id", article.getId());
+    return modelAndView;
+  }
+
+  @PostMapping("/article/delete")
+  public ModelAndView deleteArticle(@ModelAttribute("id") Long id) {
+    articleService.remove(id);
+    ModelAndView modelAndView = new ModelAndView("redirect:/article/list");
+    modelAndView.addObject("article", new Article());
+    modelAndView.addObject("success", "Remove Article Successful");
     return modelAndView;
   }
 
