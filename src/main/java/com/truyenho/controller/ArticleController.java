@@ -101,4 +101,11 @@ public class ArticleController {
     return modelAndView;
   }
 
+  @GetMapping("/article/view/{id}")
+  public ModelAndView showViewArticle(@PathVariable("id") Article article) {
+    ModelAndView modelAndView = new ModelAndView("view");
+    modelAndView.addObject("article", article);
+    return modelAndView;
+  }
+
 }

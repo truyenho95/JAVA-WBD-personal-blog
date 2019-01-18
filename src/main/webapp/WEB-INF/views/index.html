@@ -24,7 +24,7 @@
         <tr>
           <td th:text="${article.title}"></td>
           <td th:text="${article.date}"></td>
-          <td></td>
+          <td><a th:href="@{/article/view/__${article.id}__}">View</a></td>
           <td><a th:href="@{/article/edit/__${article.id}__}">Edit</a></td>
           <td><a th:href="@{/article/delete/__${article.id}__}">Delete</a></td>
         </tr>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete Article</title>
+</head>
+<body>
+<a th:href="@{/article/list}">Back to list</a>
+<h1>Article</h1>
+
+  <table border="1" cellspacing="0" cellpadding="10">
+    <tr>
+      <td>Title:</td>
+      <td th:text="${article.title}"></td>
+    </tr>
+    <tr>
+      <td>Date:</td>
+      <td th:text="${article.date}"></td>
+    </tr>
+    <tr>
+      <td>Content:</td>
+      <td th:text="${article.content}"></td>
+    </tr>
+  </table>
+
+</body>
+</html>
