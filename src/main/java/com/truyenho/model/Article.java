@@ -8,19 +8,24 @@ import java.time.LocalDate;
 public class Article {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String title;
   private LocalDate date = LocalDate.now();
   private String content;
 
+  @ManyToOne
+  @JoinColumn(name = "category_id")
+  private Category category;
+
   public Article() {
   }
 
-  public Article(String title, LocalDate date, String content) {
+  public Article(String title, LocalDate date, String content, Category category) {
     this.title = title;
     this.date = date;
     this.content = content;
+    this.category = category;
   }
 
   public Long getId() {
@@ -53,6 +58,14 @@ public class Article {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
   @Override
