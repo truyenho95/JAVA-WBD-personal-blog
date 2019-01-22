@@ -8,6 +8,11 @@
   <a th:href="@{/article/create}">Create new article</a>
   <p th:text="${success}"></p>
   <h1>Articles List</h1>
+  <form>
+    <label>Search by Title</label>
+    <input type="text" name="title">
+    <input type="submit" value="Search">
+  </form>
   <table border="1" cellpadding="10" cellspacing="0">
     <thead>
       <tr>
