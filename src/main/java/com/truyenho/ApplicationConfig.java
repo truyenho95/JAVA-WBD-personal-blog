@@ -2,7 +2,9 @@ package com.truyenho;
 
 import com.truyenho.formatter.ArticleFormatter;
 import com.truyenho.service.ArticleService;
+import com.truyenho.service.CategoryService;
 import com.truyenho.service.Impl.ArticleServiceImpl;
+import com.truyenho.service.Impl.CategoryServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -56,6 +58,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
   @Bean
   public ArticleService articleService() {
     return new ArticleServiceImpl();
+  }
+
+  @Bean
+  public CategoryService categoryService() {
+    return new CategoryServiceImpl();
   }
 
   //Thymeleaf Configuration

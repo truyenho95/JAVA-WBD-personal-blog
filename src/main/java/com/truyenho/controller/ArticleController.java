@@ -1,12 +1,15 @@
 package com.truyenho.controller;
 
 import com.truyenho.model.Article;
+import com.truyenho.model.Category;
 import com.truyenho.service.ArticleService;
+import com.truyenho.service.CategoryService;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,19 +22,22 @@ public class ArticleController {
   @Autowired
   private ArticleService articleService;
 
+  @Autowired
+  private CategoryService categoryService;
+
   @GetMapping("/")
   public ModelAndView home() {
     return new ModelAndView("redirect:/article/list");
   }
 
   @GetMapping("/article/list")
-  public ModelAndView listArticles(@RequestParam("title") Optional<String> title, Pageable pageable, @ModelAttribute("success") String success) {
+  public ModelAndView listArticles(@RequestParam("title") Optional<String> title, @PageableDefault(size = 5) Pageable pageable, @ModelAttribute("success") String success) {
     try {
       Page<Article> articles;
       if (title.isPresent()) {
         articles = articleService.findAllByTitleContaining(title.get(), pageable);
       } else {
-        articles = articleService.findAll(new PageRequest(pageable.getPageNumber(), 3));
+        articles = articleService.findAll(pageable);
       }
 
       ModelAndView modelAndView = new ModelAndView("index");
@@ -49,6 +55,8 @@ public class ArticleController {
   @GetMapping("/article/create")
   public ModelAndView showCreateArticle() {
     ModelAndView modelAndView = new ModelAndView("create");
+    Iterable<Category> categories = categoryService.findAll();
+    modelAndView.addObject("categories", categories);
     modelAndView.addObject("article", new Article());
     return modelAndView;
   }

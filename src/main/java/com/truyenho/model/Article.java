@@ -70,6 +70,6 @@ public class Article {
 
   @Override
   public String toString() {
-    return String.format("Article[title='%s', date='%s']", title, date.toString());
+    return String.format("Article[title='%s', date='%s', category='%s']", title, date.toString(), category.getCategoryName());
   }
 }
